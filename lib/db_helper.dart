@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as pth;
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'dart:async';
 
 class DBHelper {
@@ -29,18 +30,23 @@ class DBHelper {
     return await dbClient.insert('user', user.toMap());
   }
 
-  //test read
-  Future<void> test_read(String db_name) async {
-    // Get a location using getDatabasesPath
-    var databasesPath = await getDatabasesPath();
-    String path = pth.join(databasesPath, db_name);
 
-    // open the database
+  //test read
+  Future<User?> test_read() async {
+
+    var databasesPath = await getDatabasesPath();
+    String path = pth.join(databasesPath, 'user.db');
+
     Database database = await openDatabase(path, version: 1);
 
-    // Get the records for the table named user which we should have created above
-    List<Map> list = await database.rawQuery('SELECT * FROM user');
-    print(list);
+    List<Map<String, dynamic>> data =
+    await database.rawQuery('SELECT * FROM user');
+
+    if (data.isNotEmpty) {
+      return User.fromMap(data[0]);
+    } else {
+      return null;
+    }
   }
 
 }
@@ -66,4 +72,14 @@ class User {
     };
     return map;
   }
+
+  factory User.fromMap(Map<String, dynamic> map) =>
+     User(
+      map['id'],
+      map['username'],
+      map['password'],
+      map['phone'],
+      map['email'],
+      map['address'],
+    );
 }

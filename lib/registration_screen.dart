@@ -135,8 +135,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     await dbHelper.saveUser(user);
 
                     // Show a success message
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('User data saved')));
-                    await dbHelper.test_read('user.db');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('User data saved')));
+                    await dbHelper.test_read();
+                    Navigator.pushNamed(context, '/main');
                   }
                 },
                 child: const Text('Submit'),

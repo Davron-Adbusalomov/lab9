@@ -25,6 +25,7 @@ class DBHelper {
     await db.execute('CREATE TABLE user (id INTEGER PRIMARY KEY, username TEXT, password TEXT, phone TEXT, email TEXT, address TEXT)');
   }
 
+
   Future<int> saveUser(User user) async {
     var dbClient = await db;
     return await dbClient.insert('user', user.toMap());

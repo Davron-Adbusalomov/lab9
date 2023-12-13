@@ -4,6 +4,7 @@ Continue working on this project.
 
 ## Task
 
+
 1. Create another screen (e.g.: MainScreen())
 2. Design main screen with proper paddings, borders and etc...
 3. read the data from 'user.db' to fill out user information which should include:

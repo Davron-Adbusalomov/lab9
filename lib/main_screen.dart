@@ -53,6 +53,7 @@ class UserInfoLabel extends StatelessWidget {
 
   const UserInfoLabel({required this.label, required this.value});
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
